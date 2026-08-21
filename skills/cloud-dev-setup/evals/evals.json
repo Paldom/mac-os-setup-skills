@@ -1,0 +1,50 @@
+{
+  "skill": "cloud-dev-setup",
+  "cases": [
+    { "type": "should_trigger", "prompt": "install the aws cli on my mac and log me in" },
+    { "type": "should_trigger", "prompt": "set up azure cli and gcloud" },
+    { "type": "should_trigger", "prompt": "install the databricks cli and configure a profile" },
+    { "type": "should_trigger", "prompt": "get kubectl working on my mac" },
+    { "type": "should_trigger", "prompt": "set up my mac for cloud development" },
+    { "type": "should_trigger", "prompt": "terraform or opentofu - install infra tooling on this machine" },
+    { "type": "should_trigger", "prompt": "aws sso login setup with named profiles" },
+    { "type": "should_trigger", "prompt": "gcloud command not found, install google cloud sdk" },
+    { "type": "should_not_trigger", "prompt": "write a terraform module for an s3 bucket" },
+    { "type": "should_not_trigger", "prompt": "install docker desktop" },
+    { "type": "should_not_trigger", "prompt": "deploy my app to kubernetes" },
+    { "type": "should_not_trigger", "prompt": "debug why my lambda function times out" },
+    { "type": "should_not_trigger", "prompt": "create a databricks job that runs my notebook" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac for development" },
+    { "type": "should_not_trigger", "prompt": "install the github cli" },
+    { "type": "should_not_trigger", "prompt": "rotate my aws access keys in the console" },
+    {
+      "type": "quality",
+      "prompt": "Set up cloud tooling on my Mac - I use AWS and Databricks, maybe kubernetes.",
+      "expected_behavior": [
+        "asks/confirms which providers before installing; installs only AWS CLI, Databricks CLI and kubectl - nothing unselected",
+        "AWS: notes brew's awscli is community-maintained (official = installer script/pkg) but installs the user's preference; configures SSO via aws configure sso with a named profile; verifies aws sts get-caller-identity --profile",
+        "Databricks: brew tap databricks/tap (+ brew trust on Homebrew 6) then brew install databricks; auth via OAuth databricks auth login --host (PATs described as legacy); never asks the user to paste a token into chat",
+        "kubectl via brew with the version-skew (+/-1 minor) note and zsh completion",
+        "no static credentials written into shell files; profiles/config files only"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "install gcloud on this mac",
+      "expected_behavior": [
+        "offers the official tarball+install.sh path and the community cask gcloud-cli (noting the google-cloud-sdk token was renamed), picking one deliberately",
+        "runs gcloud init for auth+project and explains gcloud auth login vs application-default login distinction",
+        "notes update path depends on install method (components update vs brew upgrade --cask)"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "we need terraform on the new laptops but licensing is a thing here",
+      "expected_behavior": [
+        "presents both neutrally: Terraform (BUSL license, hashicorp/tap - gone from homebrew-core) vs OpenTofu (MPL-2.0, plain brew install opentofu)",
+        "installs the chosen one and verifies terraform -version / tofu -version",
+        "does not editorialize the licensing dispute beyond the factual difference"
+      ]
+    }
+  ]
+}

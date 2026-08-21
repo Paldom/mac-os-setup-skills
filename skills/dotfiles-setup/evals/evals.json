@@ -1,0 +1,50 @@
+{
+  "skill": "dotfiles-setup",
+  "cases": [
+    { "type": "should_trigger", "prompt": "set up a dotfiles repo for my mac config" },
+    { "type": "should_trigger", "prompt": "version control my zshrc and gitconfig" },
+    { "type": "should_trigger", "prompt": "stow or chezmoi? organize my dotfiles" },
+    { "type": "should_trigger", "prompt": "sync my shell config between my two macs" },
+    { "type": "should_trigger", "prompt": "make my machine config reproducible in git" },
+    { "type": "should_trigger", "prompt": "adopt my existing config files into a dotfiles repository" },
+    { "type": "should_trigger", "prompt": "write a bootstrap script that restores my setup on a new machine" },
+    { "type": "should_trigger", "prompt": "bare git repo trick for dotfiles - set it up" },
+    { "type": "should_not_trigger", "prompt": "restructure the contents of my zshrc" },
+    { "type": "should_not_trigger", "prompt": "create a Brewfile snapshot of my machine" },
+    { "type": "should_not_trigger", "prompt": "set up git identity and ssh keys" },
+    { "type": "should_not_trigger", "prompt": "apply macos defaults tweaks" },
+    { "type": "should_not_trigger", "prompt": "gitignore node_modules in this project" },
+    { "type": "should_not_trigger", "prompt": "set up my whole new mac for development" },
+    { "type": "should_not_trigger", "prompt": "why does stow say conflict for a file i deleted" },
+    { "type": "should_not_trigger", "prompt": "back up my mac with time machine" },
+    {
+      "type": "quality",
+      "prompt": "Put my existing config (.zshrc, .gitconfig, starship.toml) under version control properly.",
+      "expected_behavior": [
+        "asks or decides between stow/chezmoi/bare-git with a one-line tradeoff and picks one (stow default for single-machine simplicity)",
+        "ADOPTS existing files (moves them into the repo, then links back) - never overwrites live config; diffs and backs up before any replacement",
+        "scans for secrets before the first commit (tokens, keys, .env, ~/.ssh, ~/.aws) and excludes them",
+        "includes the Brewfile in the repo by reference (pointing at homebrew-setup's dump workflow rather than reinventing it)",
+        "verifies links resolve and a fresh shell still works afterwards"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "I got a new mac - restore my dotfiles from github.com/me/dotfiles",
+      "expected_behavior": [
+        "clones and DIFFS against any existing local files before linking; backs up collisions instead of clobbering",
+        "uses the repo's own manager (stow dirs, chezmoi source state, or bare-git checkout) rather than assuming one",
+        "runs or explains the bootstrap idempotently and verifies the shell works in a new terminal"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "write me a bootstrap script for my dotfiles repo",
+      "expected_behavior": [
+        "produces an idempotent, fail-fast script (set -euo pipefail) that checks prerequisites (brew present) rather than installing them inline",
+        "script backs up existing targets before linking and is safe to re-run (no duplicate links, no data loss)",
+        "keeps package installation delegated to brew bundle with the repo's Brewfile"
+      ]
+    }
+  ]
+}

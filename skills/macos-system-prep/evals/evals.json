@@ -1,0 +1,60 @@
+{
+  "skill": "macos-system-prep",
+  "cases": [
+    { "type": "should_trigger", "prompt": "I just got a brand new MacBook, what do I need to install before Homebrew?" },
+    { "type": "should_trigger", "prompt": "install the Xcode command line tools" },
+    { "type": "should_trigger", "prompt": "xcode-select --install failed, help me get the CLT set up properly" },
+    { "type": "should_trigger", "prompt": "do i need rosetta on my m4 mac? set it up if so" },
+    { "type": "should_trigger", "prompt": "prep this fresh mac so I can start installing dev tools" },
+    { "type": "should_trigger", "prompt": "git says invalid active developer path after the macOS upgrade" },
+    { "type": "should_trigger", "prompt": "update macos and get the developer toolchain baseline ready" },
+    { "type": "should_trigger", "prompt": "clang: command not found on my new mac" },
+    { "type": "should_trigger", "prompt": "where should I keep my source code on a new mac, and get the basics ready" },
+    { "type": "should_not_trigger", "prompt": "install homebrew for me" },
+    { "type": "should_not_trigger", "prompt": "enable filevault and touch id for sudo" },
+    { "type": "should_not_trigger", "prompt": "install full Xcode with iOS simulators" },
+    { "type": "should_not_trigger", "prompt": "show hidden files in Finder and speed up key repeat" },
+    { "type": "should_not_trigger", "prompt": "set up my whole new mac for development end to end" },
+    { "type": "should_not_trigger", "prompt": "upgrade all my brew packages and update everything" },
+    { "type": "should_not_trigger", "prompt": "my xcode build fails with a code signing error" },
+    { "type": "should_not_trigger", "prompt": "set up an ubuntu VM on my mac" },
+    {
+      "type": "quality",
+      "prompt": "Get my brand-new M3 MacBook ready so I can start installing developer tools.",
+      "expected_behavior": [
+        "checks for pending macOS updates first and asks the user to install them (with restart warning) before anything else",
+        "installs Xcode Command Line Tools via xcode-select --install, waits for the GUI installer, and verifies with xcode-select -p",
+        "offers Rosetta 2 install on Apple Silicon as optional, explaining the macOS 27/28 sunset, and uses softwareupdate --install-rosetta --agree-to-license only with consent",
+        "does not install Homebrew or any packages, pointing to the homebrew-setup skill as the next step",
+        "verifies each step with a read-only command before declaring done"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "git stopped working after I upgraded macOS — it says invalid active developer path.",
+      "expected_behavior": [
+        "diagnoses the missing/stale Command Line Tools rather than reinstalling git",
+        "re-runs xcode-select --install (or resets CLT) and verifies with xcode-select -p and git --version",
+        "mentions that macOS major upgrades invalidate or reset the CLT and this recurs"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Do I actually need Rosetta 2 on this Apple Silicon Mac?",
+      "expected_behavior": [
+        "explains Rosetta is only needed for remaining Intel-only apps/binaries and is being phased out (general-purpose through macOS 27, narrowed in macOS 28)",
+        "recommends installing on demand rather than preemptively, and shows the softwareupdate --install-rosetta --agree-to-license command",
+        "does not run the install without user consent"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "asdf just tell me the exact first steps on a factory-reset mac before i can brew install stuff",
+      "expected_behavior": [
+        "gives the ordered sequence: Software Update first, then Xcode CLT, then (optional) Rosetta, then hand off to Homebrew",
+        "warns not to run the CLT installer and the Homebrew installer in parallel",
+        "keeps the answer focused on prep; no package installs"
+      ]
+    }
+  ]
+}

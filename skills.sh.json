@@ -1,0 +1,31 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Start Here",
+      "description": "The orchestrator and OS groundwork that take a factory-fresh Mac to a safe, tool-ready baseline.",
+      "skills": ["macos-dev-setup", "macos-system-prep", "macos-security-baseline"]
+    },
+    {
+      "title": "Foundation",
+      "description": "The daily-driver layer every developer Mac needs: Homebrew, a sharp zsh, a modern CLI toolbelt, git identity, and sane system defaults.",
+      "skills": ["homebrew-setup", "zsh-setup", "dev-cli-tools", "git-ssh-identity", "macos-defaults"]
+    },
+    {
+      "title": "Runtimes & Stacks",
+      "description": "Version managers done right plus the opt-in tracks for containers, web, mobile, cloud, and AI-agent development.",
+      "skills": ["language-runtimes", "docker-on-mac", "web-dev-setup", "mobile-dev-setup", "cloud-dev-setup", "ai-dev-tools"]
+    },
+    {
+      "title": "Personalize & Persist",
+      "description": "Your editor, your apps, and a dotfiles repo so the whole setup survives the next machine.",
+      "skills": ["editor-setup", "mac-dev-apps", "dotfiles-setup"]
+    },
+    {
+      "title": "Keep It Current",
+      "description": "One recurring maintenance pass that updates everything safely - brew, App Store, runtimes, and disk cleanup.",
+      "skills": ["mac-maintenance"]
+    }
+  ]
+}

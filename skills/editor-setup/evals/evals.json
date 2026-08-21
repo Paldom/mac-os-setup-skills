@@ -1,0 +1,49 @@
+{
+  "skill": "editor-setup",
+  "cases": [
+    { "type": "should_trigger", "prompt": "install vs code on my mac" },
+    { "type": "should_trigger", "prompt": "the code command doesn't work in my terminal" },
+    { "type": "should_trigger", "prompt": "set up my editor with sensible defaults" },
+    { "type": "should_trigger", "prompt": "vscode settings.json baseline for a new machine" },
+    { "type": "should_trigger", "prompt": "which extensions should i install in vs code" },
+    { "type": "should_trigger", "prompt": "install cursor as my editor" },
+    { "type": "should_trigger", "prompt": "sync my vscode settings across machines" },
+    { "type": "should_trigger", "prompt": "get zed set up as a fast editor on this mac" },
+    { "type": "should_not_trigger", "prompt": "install iterm2 or ghostty" },
+    { "type": "should_not_trigger", "prompt": "set EDITOR to vim in my shell" },
+    { "type": "should_not_trigger", "prompt": "why is eslint not working in this project" },
+    { "type": "should_not_trigger", "prompt": "install intellij and the jetbrains suite for java work" },
+    { "type": "should_not_trigger", "prompt": "install slack chrome and the other gui apps" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac for development" },
+    { "type": "should_not_trigger", "prompt": "configure neovim with lazyvim plugins" },
+    { "type": "should_not_trigger", "prompt": "the typescript language server is slow in this monorepo" },
+    {
+      "type": "quality",
+      "prompt": "Install and set up VS Code properly on this Mac.",
+      "expected_behavior": [
+        "installs via brew cask visual-studio-code and gets the code CLI working (built into PATH via the palette command or the cask's linking) - verifies code --version in a fresh shell",
+        "applies a small settings.json baseline (format on save, files.trimTrailingWhitespace, insertFinalNewline...) via merging - never wholesale replacing an existing settings.json without diff+backup",
+        "suggests a minimal language-independent extension set and installs only what the user confirms (code --install-extension)",
+        "mentions Settings Sync sign-in as the manual step for cross-machine sync",
+        "does not install language runtimes or configure project-specific linters"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "code . says command not found",
+      "expected_behavior": [
+        "fixes the code CLI: Command Palette > Shell Command: Install 'code' command in PATH, or verifies the brew cask's binary link",
+        "checks PATH in a fresh shell rather than aliasing a hardcoded app path as first resort"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "i want cursor instead of vscode, move me over",
+      "expected_behavior": [
+        "installs the cursor cask and notes it can import VS Code settings/extensions on first run",
+        "sets up the cursor CLI command and verifies it",
+        "leaves VS Code untouched unless the user asks for removal"
+      ]
+    }
+  ]
+}

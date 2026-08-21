@@ -1,0 +1,59 @@
+{
+  "skill": "macos-defaults",
+  "cases": [
+    { "type": "should_trigger", "prompt": "show hidden files in Finder" },
+    { "type": "should_trigger", "prompt": "make my key repeat faster on macos" },
+    { "type": "should_trigger", "prompt": "change where screenshots are saved" },
+    { "type": "should_trigger", "prompt": "clean up the dock and make it autohide" },
+    { "type": "should_trigger", "prompt": "apply sensible macos defaults for a developer" },
+    { "type": "should_trigger", "prompt": "turn off autocorrect and smart quotes, they break my code snippets" },
+    { "type": "should_trigger", "prompt": "finder should show the path bar and file extensions" },
+    { "type": "should_trigger", "prompt": "defaults write tweaks for a new mac pls" },
+    { "type": "should_trigger", "prompt": "stop macos from creating .DS_Store files on network drives" },
+    { "type": "should_not_trigger", "prompt": "enable filevault and the firewall" },
+    { "type": "should_not_trigger", "prompt": "install homebrew" },
+    { "type": "should_not_trigger", "prompt": "set up my terminal prompt and zsh plugins" },
+    { "type": "should_not_trigger", "prompt": "set up my entire new mac for development" },
+    { "type": "should_not_trigger", "prompt": "install raycast and rectangle" },
+    { "type": "should_not_trigger", "prompt": "write a defaults section for my linux dotfiles" },
+    { "type": "should_not_trigger", "prompt": "change my VS Code settings.json defaults" },
+    { "type": "should_not_trigger", "prompt": "why is my mac slow, check activity monitor" },
+    {
+      "type": "quality",
+      "prompt": "Apply good developer defaults to this Mac: Finder, Dock, keyboard, screenshots.",
+      "expected_behavior": [
+        "shows the user the list of defaults write commands grouped by area and confirms before applying (some, like clearing Dock icons, change visible state)",
+        "creates the screenshot folder before pointing com.apple.screencapture location at it",
+        "runs the right apply step per domain (killall Finder/Dock; notes KeyRepeat/InitialKeyRepeat need logout/login)",
+        "verifies at least one key with defaults read and warns that these keys are undocumented and can drift across macOS majors",
+        "does not touch security-related settings"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "make holding a key repeat it instead of showing the accent popup",
+      "expected_behavior": [
+        "sets ApplePressAndHoldEnabled to false (global or per-app) and explains apps must be relaunched",
+        "offers the KeyRepeat/InitialKeyRepeat speed-up as a companion, noting logout/login requirement"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "remove all the junk icons from my dock like a fresh minimal setup",
+      "expected_behavior": [
+        "warns this clears all pinned Dock apps (reversible by re-pinning) and asks before running",
+        "uses defaults write com.apple.dock persistent-apps -array (and optionally persistent-others) followed by killall Dock",
+        "suggests companion Dock settings (autohide, show-recents false) as options"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "my screenshots should go to ~/Screenshots as png without shadows",
+      "expected_behavior": [
+        "mkdir -p the folder first because macOS will not create it",
+        "sets location, type png, disable-shadow on com.apple.screencapture and applies (killall SystemUIServer is harmless legacy; on Tahoe changes apply immediately)",
+        "mentions the Cmd+Shift+5 GUI alternative and verifies with defaults read"
+      ]
+    }
+  ]
+}

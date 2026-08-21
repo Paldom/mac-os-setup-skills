@@ -1,0 +1,50 @@
+{
+  "skill": "mac-dev-apps",
+  "cases": [
+    { "type": "should_trigger", "prompt": "install my mac apps - chrome, slack, spotify, the usual" },
+    { "type": "should_trigger", "prompt": "which gui apps should a developer install on a new mac" },
+    { "type": "should_trigger", "prompt": "install raycast and a window manager" },
+    { "type": "should_trigger", "prompt": "set up a terminal app - warp, ghostty or iterm2?" },
+    { "type": "should_trigger", "prompt": "install amphetamine to keep my mac awake" },
+    { "type": "should_trigger", "prompt": "get me a database gui like dbeaver or tableplus" },
+    { "type": "should_trigger", "prompt": "install zoom, figma and a vpn client" },
+    { "type": "should_trigger", "prompt": "install apps from the app store via the command line" },
+    { "type": "should_trigger", "prompt": "kit out this new macbook with the standard productivity apps" },
+    { "type": "should_not_trigger", "prompt": "install ripgrep, fzf and the cli tools" },
+    { "type": "should_not_trigger", "prompt": "install and configure vs code" },
+    { "type": "should_not_trigger", "prompt": "install docker desktop or orbstack" },
+    { "type": "should_not_trigger", "prompt": "install homebrew" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac from scratch" },
+    { "type": "should_not_trigger", "prompt": "configure raycast hotkeys and extensions in depth" },
+    { "type": "should_not_trigger", "prompt": "install the aws cli and kubectl" },
+    { "type": "should_not_trigger", "prompt": "install claude code and the ai coding clis" },
+    {
+      "type": "quality",
+      "prompt": "Install the standard app set on my new Mac: browser, comms, terminal, launcher, utilities.",
+      "expected_behavior": [
+        "asks which groups/apps the user wants instead of installing a fixed list; installs via brew casks with correct current tokens",
+        "handles App Store-only apps (e.g. Amphetamine) via mas with the id, telling the user to sign into the App Store app first since mas cannot sign in",
+        "flags apps needing manual steps after install: launcher hotkey remap for Raycast, license keys, VPN sign-ins",
+        "notes GUI apps mostly self-update (auto_updates casks) so plain brew upgrade skips them",
+        "does not install CLI-only tools, editors, or container runtimes"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "i need a terminal app recommendation and install",
+      "expected_behavior": [
+        "offers the 2026 trio with one-line tradeoffs - Ghostty (recommended default: fast, native, open source), Warp (AI features, optional account), iTerm2 (mature, most configurable) - and installs the chosen one",
+        "reminds about selecting the Nerd Font in the new terminal's profile if a prompt theme is in use",
+        "does not switch the user's shell or prompt config"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "install messenger and filezilla like my old setup guide says",
+      "expected_behavior": [
+        "flags that the messenger cask is deprecated/disabled and filezilla has no cask - offers current alternatives (web messenger.com, or direct download; Cyberduck/Transmit for file transfer) instead of failing silently",
+        "installs only what has a working source and reports what was skipped and why"
+      ]
+    }
+  ]
+}

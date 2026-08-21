@@ -1,0 +1,50 @@
+{
+  "skill": "web-dev-setup",
+  "cases": [
+    { "type": "should_trigger", "prompt": "set up my mac for full-stack web development" },
+    { "type": "should_trigger", "prompt": "install postgres locally with brew services" },
+    { "type": "should_trigger", "prompt": "install pnpm on my mac" },
+    { "type": "should_trigger", "prompt": "i need redis running locally for development" },
+    { "type": "should_trigger", "prompt": "corepack enable says command not found on node 26" },
+    { "type": "should_trigger", "prompt": "set up an api client like bruno or postman" },
+    { "type": "should_trigger", "prompt": "local database for my next.js app - get it running" },
+    { "type": "should_trigger", "prompt": "brew services start postgresql isn't working, set my db up right" },
+    { "type": "should_not_trigger", "prompt": "install node with a version manager" },
+    { "type": "should_not_trigger", "prompt": "run postgres in a docker container" },
+    { "type": "should_not_trigger", "prompt": "npm install this project's dependencies" },
+    { "type": "should_not_trigger", "prompt": "deploy my app to vercel" },
+    { "type": "should_not_trigger", "prompt": "write a sql query joining these tables" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac for development" },
+    { "type": "should_not_trigger", "prompt": "install dbeaver to browse my database" },
+    { "type": "should_not_trigger", "prompt": "fix cors errors in my express api" },
+    {
+      "type": "quality",
+      "prompt": "Set up this Mac for full-stack web work: package manager, local databases, API client.",
+      "expected_behavior": [
+        "checks node exists (pointing to language-runtimes if not) and installs pnpm via brew - explaining corepack no longer ships with Node 25+ so brew is the reliable path",
+        "installs a PINNED postgres major (postgresql@17 or @18, keg-only PATH note) plus redis, starts both via brew services, and verifies with psql/redis-cli pings",
+        "warns that postgres major upgrades need pg_upgrade - never blind brew upgrade across majors",
+        "offers Bruno or Postman cask for API testing",
+        "mentions the containerized-database alternative (docker-on-mac) for prod-parity, without installing it"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "postgres via brew: it installed but psql: command not found",
+      "expected_behavior": [
+        "diagnoses the keg-only versioned formula - psql isn't linked into PATH",
+        "adds the $(brew --prefix postgresql@17)/bin PATH line (grep-guarded) or uses brew link guidance",
+        "verifies psql --version and connection afterwards"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "give me redis locally and make sure it survives reboots",
+      "expected_behavior": [
+        "brew install redis and brew services start redis (launchd = starts at login)",
+        "verifies with redis-cli ping -> PONG and brew services list",
+        "notes the service binds localhost by default"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "skill": "mobile-dev-setup",
+  "cases": [
+    { "type": "should_trigger", "prompt": "set up my mac for ios development" },
+    { "type": "should_trigger", "prompt": "install full xcode with simulators" },
+    { "type": "should_trigger", "prompt": "set up android studio and the sdk on my mac" },
+    { "type": "should_trigger", "prompt": "react native environment setup on macos" },
+    { "type": "should_trigger", "prompt": "flutter doctor complains about android licenses and xcode" },
+    { "type": "should_trigger", "prompt": "xcodebuild says it requires Xcode but I have it installed" },
+    { "type": "should_trigger", "prompt": "ANDROID_HOME is not set - fix my android env vars" },
+    { "type": "should_trigger", "prompt": "get the ios simulator and an android emulator working" },
+    { "type": "should_trigger", "prompt": "prepare this machine for mobile app development" },
+    { "type": "should_not_trigger", "prompt": "install the xcode command line tools only" },
+    { "type": "should_not_trigger", "prompt": "fix this swift compile error in my view controller" },
+    { "type": "should_not_trigger", "prompt": "publish my app to the app store" },
+    { "type": "should_not_trigger", "prompt": "install java with jenv for my spring backend" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac for development" },
+    { "type": "should_not_trigger", "prompt": "why does my flutter widget overflow on small screens" },
+    { "type": "should_not_trigger", "prompt": "set up fastlane ci pipelines for our team release train" },
+    { "type": "should_not_trigger", "prompt": "install docker for my backend containers" },
+    {
+      "type": "quality",
+      "prompt": "Set up this Mac for mobile development.",
+      "expected_behavior": [
+        "asks iOS, Android, or both BEFORE installing anything, and installs only the selected track(s)",
+        "iOS: installs full Xcode (App Store or xcodes; ~40-50GB free space warning), then sudo xcode-select -s to Xcode.app, xcodebuild -license accept, -runFirstLaunch, and simulator runtime download",
+        "Android: android-studio cask, first-run SDK wizard, ANDROID_HOME=~/Library/Android/sdk plus platform-tools/emulator/cmdline-tools PATH lines (grep-guarded), sdkmanager --licenses",
+        "verifies per track: xcodebuild -version / simulator boots; adb --version / emulator arm64 image",
+        "flags manual steps: App Store sign-in for Xcode, Apple Developer account tiers (free = 7-day provisioning), license acceptances"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "cocoapods/xcodebuild says 'requires Xcode but active developer directory is CommandLineTools'",
+      "expected_behavior": [
+        "runs sudo xcode-select -s /Applications/Xcode.app/Contents/Developer rather than reinstalling anything",
+        "explains this recurs after macOS upgrades and fresh Xcode installs (the pointer resets to CLT)",
+        "verifies with xcode-select -p and xcodebuild -version"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "react native doctor is failing all over - node ok but ios and android both red",
+      "expected_behavior": [
+        "works through the RN checklist: watchman via brew, full Xcode active via xcode-select, CocoaPods present if the project uses it (noting maintenance mode / precompiled frameworks trend), Android env vars + JDK 17+ for Gradle",
+        "notes Expo is the officially recommended default for new RN apps (framework-less setup only when needed)",
+        "re-runs the doctor and reports remaining failures honestly"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "android emulator on my m3 - which image and how",
+      "expected_behavior": [
+        "creates an AVD with an arm64-v8a system image (never x86_64 on Apple Silicon)",
+        "notes acceleration is automatic via Hypervisor.framework (no HAXM) and verifies with emulator -accel-check or by booting the AVD"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "skill": "language-runtimes",
+  "cases": [
+    {
+      "type": "should_trigger",
+      "prompt": "set up node and python version managers on my mac"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "install nvm and the latest LTS node"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "pyenv or uv? set up python properly on this machine"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "install java with jenv so i can switch jdk versions"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "install mise and manage my runtimes with it"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "i need multiple node versions for different projects"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "which version manager should i use in 2026 for python/node/java"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "set up poetry and pipx for python cli tools"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "my shell has nvm, mise AND asdf and everything is slow and conflicting - untangle it"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "npm install the dependencies for this project"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "create a venv for this repo and install requirements.txt"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install pnpm and set up postgres for my web app"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install homebrew"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "fix this python TypeError"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "set up android studio with the right JDK"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "upgrade all my installed tools"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "set up my whole mac from scratch for development"
+    },
+    {
+      "type": "quality",
+      "prompt": "Set up version managers for Node, Python and Java on my Mac.",
+      "expected_behavior": [
+        "detects existing managers first (nvm dir, pyenv, jenv, mise, asdf) and preserves what exists rather than stacking a second manager per runtime",
+        "on a fresh machine installs the modern set by default: mise for Node/Java/Go (node@lts, java@temurin LTS pin - noting plain temurin/java@latest tracks non-LTS) and uv for Python",
+        "adds mise activate and rustup PATH lines to .zshrc idempotently and enables mise's idiomatic version-file setting for node",
+        "respects an explicit user tool choice (asking for nvm gets nvm, per the classic reference)",
+        "verifies node -v / python or uv / java --version / go version in a fresh shell with exactly one manager per runtime"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "python on this mac is a mess - system python, some brew pythons, nothing consistent. fix it with something modern",
+      "expected_behavior": [
+        "recommends uv as the single Python tool (interpreters via uv python install, projects via uv init/add, CLIs via uv tool install replacing pipx) without uninstalling brew pythons that other formulae depend on",
+        "never touches or relies on system python, and explains why",
+        "notes uv self update only works for the standalone installer - brew installs update via brew",
+        "verifies with uv --version and uv python list"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "i have nvm but also installed mise yesterday and now node is weird",
+      "expected_behavior": [
+        "diagnoses the two-managers-one-runtime conflict via PATH/shim inspection (type -a node, which manager activates in .zshrc)",
+        "asks the user which to keep and cleanly disables the other for node (removes its init line or disables mise's node tool) - does not delete data without consent",
+        "verifies node resolves from exactly one manager afterwards"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "give me java 21 and 25 side by side with easy switching",
+      "expected_behavior": [
+        "installs both LTS JDKs via mise (java@temurin-21 and java@temurin-25) or versioned Temurin casks with jenv if jenv already manages java - not the unversioned temurin cask",
+        "sets a sensible global default and shows per-project switching (mise use java@... / jenv local)",
+        "verifies with java --version and /usr/libexec/java_home -V"
+      ]
+    }
+  ]
+}

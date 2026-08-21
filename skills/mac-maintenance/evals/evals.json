@@ -1,0 +1,60 @@
+{
+  "skill": "mac-maintenance",
+  "cases": [
+    { "type": "should_trigger", "prompt": "update everything on my mac" },
+    { "type": "should_trigger", "prompt": "upgrade my brew packages and clean up" },
+    { "type": "should_trigger", "prompt": "run my regular maintenance pass on this machine" },
+    { "type": "should_trigger", "prompt": "keep my dev tools current - do the weekly update" },
+    { "type": "should_trigger", "prompt": "brew outdated shows a bunch, bring things up to date safely" },
+    { "type": "should_trigger", "prompt": "update app store apps and macos from the terminal" },
+    { "type": "should_trigger", "prompt": "reclaim disk space from old brew versions and caches" },
+    { "type": "should_trigger", "prompt": "why didn't brew upgrade update chrome and vscode?" },
+    { "type": "should_trigger", "prompt": "update oh-my-zsh, my node versions and global tools too" },
+    { "type": "should_not_trigger", "prompt": "install homebrew on this new mac" },
+    { "type": "should_not_trigger", "prompt": "set up a Brewfile for the first time" },
+    { "type": "should_not_trigger", "prompt": "upgrade this project's npm dependencies" },
+    { "type": "should_not_trigger", "prompt": "update my macos to the new major version and migrate everything" },
+    { "type": "should_not_trigger", "prompt": "brew doctor says my install is broken, fix homebrew" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac for development" },
+    { "type": "should_not_trigger", "prompt": "docker system prune everything now" },
+    { "type": "should_not_trigger", "prompt": "bump the version in package.json and cut a release" },
+    {
+      "type": "quality",
+      "prompt": "Run a full but safe update pass on my dev machine.",
+      "expected_behavior": [
+        "asks about timing first (not right before a release/demo) or at least warns, then runs brew update, brew outdated (showing the list before upgrading), brew upgrade",
+        "explains cask auto_updates semantics: self-updating apps are skipped by design; --greedy only on request",
+        "runs cleanup (brew cleanup, brew autoremove) and mas update; macOS softwareupdate only with explicit consent and a restart warning",
+        "updates the shell/runtime layer that exists: omz update, runtime managers (nvm/mise), uv tools, pipx, rustup, gh extensions - detecting what's installed rather than assuming",
+        "skips pinned/major-version-sensitive things (postgresql@N majors) and reports exactly what changed and what was deferred"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "chrome and vs code never update through brew upgrade - broken?",
+      "expected_behavior": [
+        "explains auto_updates casks self-update and plain brew upgrade skips them intentionally",
+        "shows brew upgrade --cask --greedy (or --greedy-auto-updates) as the opt-in, with the downside (re-downloads apps that already updated themselves)",
+        "recommends letting self-updaters do their job as the default"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "my disk is filling up, claw back space from dev tooling",
+      "expected_behavior": [
+        "starts read-only: docker system df, du on caches, brew cleanup --dry-run before deleting anything",
+        "safe reclaims: brew cleanup (and -s), brew autoremove, npm cache verify, xcrun simctl delete unavailable if Xcode present",
+        "treats docker system prune as destructive: shows what would go, warns volumes are excluded by default and --volumes deletes data, requires explicit confirmation"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "set this machine up so updates are a one-command habit",
+      "expected_behavior": [
+        "offers topgrade via brew with a reviewed ~/.config/topgrade.toml that disables risky steps (system/mas at minimum) rather than default-everything",
+        "alternative: a small documented routine (brew update/upgrade/cleanup + bundle check) if the user prefers no extra tool",
+        "keeps the Brewfile in sync (brew bundle dump with confirm-before-force) after upgrades"
+      ]
+    }
+  ]
+}

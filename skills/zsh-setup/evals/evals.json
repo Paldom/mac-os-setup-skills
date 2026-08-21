@@ -1,0 +1,62 @@
+{
+  "skill": "zsh-setup",
+  "cases": [
+    { "type": "should_trigger", "prompt": "set up my zsh shell on this mac" },
+    { "type": "should_trigger", "prompt": "install starship as my prompt" },
+    { "type": "should_trigger", "prompt": "give me a nice modern terminal prompt" },
+    { "type": "should_trigger", "prompt": "should i still use powerlevel10k or switch to starship?" },
+    { "type": "should_trigger", "prompt": "my zshrc is a mess, restructure it properly" },
+    { "type": "should_trigger", "prompt": "zsh plugins pls - suggestions as i type and colored commands" },
+    { "type": "should_trigger", "prompt": "the prompt icons show as boxes/question marks in my terminal" },
+    { "type": "should_trigger", "prompt": "shell startup is slow, clean up my zsh config" },
+    { "type": "should_trigger", "prompt": "i have oh-my-zsh already, modernize my shell setup" },
+    { "type": "should_not_trigger", "prompt": "install ghostty or iterm2" },
+    { "type": "should_not_trigger", "prompt": "install ripgrep fzf and bat" },
+    { "type": "should_not_trigger", "prompt": "write a bash script to rename files" },
+    { "type": "should_not_trigger", "prompt": "put my zshrc into a dotfiles repo" },
+    { "type": "should_not_trigger", "prompt": "install homebrew and wire up my PATH" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac dev environment" },
+    { "type": "should_not_trigger", "prompt": "why does my python venv not activate in vscode's terminal" },
+    { "type": "should_not_trigger", "prompt": "configure git aliases" },
+    {
+      "type": "quality",
+      "prompt": "Set up zsh nicely on my Mac: good plugins and a fast prompt.",
+      "expected_behavior": [
+        "installs zsh-autosuggestions and zsh-syntax-highlighting via brew and sources them through $HOMEBREW_PREFIX with syntax-highlighting last",
+        "installs Starship as the prompt (not Powerlevel10k/Oh My Zsh by default) with its init line near the end of .zshrc, added idempotently",
+        "installs a Nerd Font cask directly (no dead cask-fonts tap) and reminds the user to select it in their terminal app",
+        "backs up .zshrc with a timestamped copy before restructuring",
+        "verifies in a fresh shell: prompt renders, autosuggestions appear, highlighting colors commands"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "I already run oh-my-zsh with powerlevel10k - modernize this.",
+      "expected_behavior": [
+        "detects the existing OMZ+p10k setup rather than assuming a fresh machine, and keeps OMZ plugins working",
+        "discloses p10k's maintenance-only status and switches the prompt to Starship: blanks ZSH_THEME, removes the p10k source line, adds starship init after oh-my-zsh.sh",
+        "ensures exactly one prompt is active afterwards and does not double-install brew plugin copies alongside OMZ's",
+        "respects the user's choice if they explicitly insist on keeping p10k, pointing to the legacy reference"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "my terminal shows weird boxes instead of icons in the prompt",
+      "expected_behavior": [
+        "diagnoses a missing/unselected Nerd Font rather than reinstalling the prompt",
+        "installs a Nerd Font cask and tells the user to select it in the terminal profile",
+        "does not switch prompt themes as a fix"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "zsh takes like 2 seconds to open a new tab, speed it up",
+      "expected_behavior": [
+        "profiles startup (zmodload zsh/zprof ... zprof) before changing anything",
+        "targets the actual offenders: heavy plugin lists, eager version-manager init, duplicate compinit; suggests structural fixes not micro-hacks",
+        "keeps PATH/bootstrap in .zprofile and interactive-only config in .zshrc",
+        "re-measures after changes and reports the delta"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "skill": "macos-security-baseline",
+  "cases": [
+    { "type": "should_trigger", "prompt": "set up touch id for sudo on my mac" },
+    { "type": "should_trigger", "prompt": "enable filevault on this macbook" },
+    { "type": "should_trigger", "prompt": "harden my dev mac's security basics" },
+    { "type": "should_trigger", "prompt": "turn on the macos firewall" },
+    { "type": "should_trigger", "prompt": "sudo with fingerprint instead of typing my password every time" },
+    { "type": "should_trigger", "prompt": "is my new mac encrypted? secure it for work use" },
+    { "type": "should_trigger", "prompt": "touch id sudo stopped working after the macos update" },
+    { "type": "should_trigger", "prompt": "what security settings should a developer enable on a mac" },
+    { "type": "should_not_trigger", "prompt": "install the xcode command line tools" },
+    { "type": "should_not_trigger", "prompt": "generate an ssh key for github" },
+    { "type": "should_not_trigger", "prompt": "sign my git commits" },
+    { "type": "should_not_trigger", "prompt": "set up my whole new mac for development" },
+    { "type": "should_not_trigger", "prompt": "show hidden files and change screenshot location" },
+    { "type": "should_not_trigger", "prompt": "my app is blocked by gatekeeper, how do I run this unsigned binary" },
+    { "type": "should_not_trigger", "prompt": "audit my npm dependencies for vulnerabilities" },
+    { "type": "should_not_trigger", "prompt": "set up a vpn client on my mac" },
+    {
+      "type": "quality",
+      "prompt": "Enable Touch ID for sudo on my Mac.",
+      "expected_behavior": [
+        "uses /etc/pam.d/sudo_local (from sudo_local.template), never edits /etc/pam.d/sudo directly, and explains sudo_local survives OS updates",
+        "uses an anchored substitution (s/^#auth/auth/) or careful uncomment rather than a full-string sed that can miss the template's whitespace",
+        "asks for consent before the sudo/PAM change and verifies afterwards in a NEW terminal with sudo -k plus a harmless sudo command",
+        "mentions the tmux/iTerm2 caveat (pam_reattach or iTerm2 session setting) only if relevant"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Secure this MacBook before I use it for client work.",
+      "expected_behavior": [
+        "walks FileVault enablement as a manual System Settings step and tells the user to store the recovery key in a password manager - never asks for or records the key",
+        "enables the application firewall (System Settings path or socketfilterfw with consent)",
+        "offers Touch ID for sudo as a convenience+security win",
+        "explicitly avoids weakening protections (no Gatekeeper disabling, no automatic security exceptions)",
+        "verifies state with read-only commands (fdesetup status, firewall state) and reports actual output"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "touch id for sudo broke after upgrading macos",
+      "expected_behavior": [
+        "checks whether /etc/pam.d/sudo_local still exists and recreates it from the template if the setup had edited /etc/pam.d/sudo instead",
+        "verifies pam_tid line is uncommented and tests in a fresh shell",
+        "explains why sudo_local is the update-surviving mechanism"
+      ]
+    }
+  ]
+}

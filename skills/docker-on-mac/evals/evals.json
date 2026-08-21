@@ -1,0 +1,50 @@
+{
+  "skill": "docker-on-mac",
+  "cases": [
+    { "type": "should_trigger", "prompt": "install docker on my mac" },
+    { "type": "should_trigger", "prompt": "docker desktop or orbstack, what should i use?" },
+    { "type": "should_trigger", "prompt": "set up colima as a free docker runtime" },
+    { "type": "should_trigger", "prompt": "docker command not found even though i brew installed docker" },
+    { "type": "should_trigger", "prompt": "we're over 250 employees - is docker desktop still free for us?" },
+    { "type": "should_trigger", "prompt": "run an amd64 container on my m2 mac" },
+    { "type": "should_trigger", "prompt": "get containers working on this new macbook" },
+    { "type": "should_trigger", "prompt": "switch my docker context to orbstack" },
+    { "type": "should_not_trigger", "prompt": "write a dockerfile for this node app" },
+    { "type": "should_not_trigger", "prompt": "set up a kubernetes cluster on aws" },
+    { "type": "should_not_trigger", "prompt": "docker compose up fails with this yaml error" },
+    { "type": "should_not_trigger", "prompt": "install postgres and redis with brew services" },
+    { "type": "should_not_trigger", "prompt": "install kubectl and the cloud CLIs" },
+    { "type": "should_not_trigger", "prompt": "install parallels for a windows vm" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac for development" },
+    { "type": "should_not_trigger", "prompt": "optimize this docker image size" },
+    {
+      "type": "quality",
+      "prompt": "Get Docker working on my Mac - pick the right runtime for me.",
+      "expected_behavior": [
+        "asks the two decision questions: commercial use / org size (250 employees or $10M revenue -> Docker Desktop needs a paid plan; any commercial use -> OrbStack needs Pro) and preference for GUI vs CLI",
+        "installs the chosen runtime with the correct current tokens (docker-desktop cask, orbstack cask, or colima + docker CLI formula)",
+        "verifies with docker run --rm hello-world and docker context ls",
+        "explains the docker formula vs docker-desktop cask trap if relevant",
+        "does not write Dockerfiles or set up Kubernetes"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "i brew installed docker but there's no docker app and nothing runs",
+      "expected_behavior": [
+        "diagnoses that the docker formula is the CLI client only - no engine",
+        "offers a runtime (docker-desktop cask, orbstack, or colima start) instead of reinstalling the CLI",
+        "verifies hello-world afterwards"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "my image builds on the mac but fails in CI with exec format error",
+      "expected_behavior": [
+        "identifies the arm64-vs-amd64 architecture mismatch (Apple Silicon builds default to linux/arm64)",
+        "shows --platform linux/amd64 for a one-off and docker buildx build --platform linux/amd64,linux/arm64 for multi-arch, noting emulation is slower",
+        "mentions Rosetta-based x86 emulation as the compatibility path, not the default workflow"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "skill": "homebrew-setup",
+  "cases": [
+    { "type": "should_trigger", "prompt": "install homebrew on my mac" },
+    { "type": "should_trigger", "prompt": "brew: command not found" },
+    { "type": "should_trigger", "prompt": "set up a Brewfile so I can reproduce my machine" },
+    { "type": "should_trigger", "prompt": "how do i get brew working on this new apple silicon macbook" },
+    { "type": "should_trigger", "prompt": "brew doctor is complaining, fix my homebrew install" },
+    { "type": "should_trigger", "prompt": "restore all my apps from a Brewfile with brew bundle" },
+    { "type": "should_trigger", "prompt": "homebrew installed but every new terminal cant find it" },
+    { "type": "should_trigger", "prompt": "snapshot everything ive installed with brew into a file" },
+    { "type": "should_trigger", "prompt": "install mas so brew bundle can handle app store apps" },
+    { "type": "should_not_trigger", "prompt": "which CLI tools should I install on a new mac" },
+    { "type": "should_not_trigger", "prompt": "brew upgrade everything and clean up old versions" },
+    { "type": "should_not_trigger", "prompt": "install the xcode command line tools" },
+    { "type": "should_not_trigger", "prompt": "install docker desktop" },
+    { "type": "should_not_trigger", "prompt": "install slack, chrome and raycast on my mac" },
+    { "type": "should_not_trigger", "prompt": "set up postgres and redis as local services" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac for development from scratch" },
+    { "type": "should_not_trigger", "prompt": "write an ansible playbook to provision ubuntu servers with packages" },
+    {
+      "type": "quality",
+      "prompt": "Install Homebrew on my new M-series Mac and make sure it works in every terminal.",
+      "expected_behavior": [
+        "checks Xcode CLT exists first (points to macos-system-prep if missing) and never runs the two installers in parallel",
+        "runs the official install script, then adds the eval brew shellenv line to ~/.zprofile idempotently (grep-guard, no duplicates)",
+        "verifies with brew --version, brew --prefix (/opt/homebrew on Apple Silicon) and brew doctor in a fresh shell",
+        "offers brew analytics off as an opt-out choice, not silently",
+        "does not install any formulae or casks beyond verification"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "I want my whole machine reproducible - set up the Brewfile workflow.",
+      "expected_behavior": [
+        "explains dump/install/check/cleanup roles and that this skill owns Brewfile regeneration",
+        "uses brew bundle dump --describe and asks before --force overwriting an existing Brewfile",
+        "shows mas and vscode entry support and where the Brewfile lives (~/.Brewfile global or repo-tracked file)",
+        "warns brew bundle cleanup --force uninstalls anything not listed and requires reviewing the list first",
+        "suggests tracking the Brewfile in a dotfiles repo (pointer, not implementation)"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "brew works in the terminal where I installed it but not in new tabs",
+      "expected_behavior": [
+        "diagnoses the missing shellenv line in ~/.zprofile rather than reinstalling Homebrew",
+        "appends eval \"$(/opt/homebrew/bin/brew shellenv)\" exactly once and verifies in a fresh shell",
+        "checks for accidental Intel-vs-ARM double installs (brew --prefix vs uname -m) if symptoms persist"
+      ]
+    }
+  ]
+}

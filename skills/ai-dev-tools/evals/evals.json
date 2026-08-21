@@ -1,0 +1,102 @@
+{
+  "skill": "ai-dev-tools",
+  "cases": [
+    {
+      "type": "should_trigger",
+      "prompt": "install claude code on my mac"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "set up the openai codex cli"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "install gemini cli and log in with my google account"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "get the github copilot cli working"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "install the AI coding agents on this machine - claude, codex, the lot"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "is there an official grok or kimi cli? install them"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "set up ai coding tools with my existing subscriptions"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "claude code installed via npm - should i switch to the native installer?"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "install the pi coding agent cli"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "write a CLAUDE.md for this repo"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "build an mcp server for our api"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "why is claude code giving wrong answers on this refactor"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "call the anthropic api from python"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install vs code and cursor"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "set up my whole mac for development"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install ollama and run a local llm"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "compare claude vs gpt for coding"
+    },
+    {
+      "type": "quality",
+      "prompt": "Install the AI coding CLIs I'd want on a new Mac - I have Claude and ChatGPT subscriptions.",
+      "expected_behavior": [
+        "asks which CLIs (Claude Code, Codex, Gemini, Copilot, Grok Build, Kimi Code) before installing; installs only the selected ones via each vendor's current official channel",
+        "Claude Code via the native installer (npm/brew as secondaries), Codex via its installer or npm - and browser sign-in with the existing subscriptions rather than API keys",
+        "verifies each with --version and a doctor command where available (claude doctor)",
+        "raises the security angle: these agents get read/write+exec on the machine - recommends permission allowlists and reviewing what a session may touch",
+        "no API keys are requested or stored during setup"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "set up github copilot on the command line",
+      "expected_behavior": [
+        "installs the standalone Copilot CLI (npm @github/copilot, brew cask, or gh.io install script) - NOT the deprecated gh-copilot extension (archived Oct 2025)",
+        "authenticates via /login with the GitHub account that has a Copilot subscription",
+        "verifies the copilot command works"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "which of these agent CLIs read AGENTS.md and where do they keep their config?",
+      "expected_behavior": [
+        "gives the accurate 2026 matrix: Codex/Grok Build/OpenCode native AGENTS.md; Gemini via context.fileName setting; Claude Code via @AGENTS.md import in CLAUDE.md",
+        "lists config homes (~/.claude, ~/.codex/config.toml, ~/.gemini, ~/.copilot...)",
+        "flags the unverified/changing bits as such instead of asserting stale details"
+      ]
+    }
+  ]
+}

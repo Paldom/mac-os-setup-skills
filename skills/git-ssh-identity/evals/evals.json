@@ -1,0 +1,61 @@
+{
+  "skill": "git-ssh-identity",
+  "cases": [
+    { "type": "should_trigger", "prompt": "set up git on my new mac" },
+    { "type": "should_trigger", "prompt": "generate an ssh key for github" },
+    { "type": "should_trigger", "prompt": "sign my commits so github shows verified" },
+    { "type": "should_trigger", "prompt": "git keeps asking for my ssh passphrase after every reboot" },
+    { "type": "should_trigger", "prompt": "use a different git email for work repos vs personal ones" },
+    { "type": "should_trigger", "prompt": "gh auth login and hook git up to github properly" },
+    { "type": "should_trigger", "prompt": "sensible git global config defaults pls" },
+    { "type": "should_trigger", "prompt": "add a global gitignore for .DS_Store and node_modules" },
+    { "type": "should_trigger", "prompt": "permission denied (publickey) when pushing to github" },
+    { "type": "should_not_trigger", "prompt": "help me rebase this feature branch onto main" },
+    { "type": "should_not_trigger", "prompt": "write a good commit message for these changes" },
+    { "type": "should_not_trigger", "prompt": "set up branch protection on my github repo" },
+    { "type": "should_not_trigger", "prompt": "enable touch id for sudo" },
+    { "type": "should_not_trigger", "prompt": "install git via homebrew along with other cli tools" },
+    { "type": "should_not_trigger", "prompt": "set up my whole mac for development" },
+    { "type": "should_not_trigger", "prompt": "configure ssh access to my ubuntu server fleet" },
+    { "type": "should_not_trigger", "prompt": "resolve these merge conflicts" },
+    {
+      "type": "quality",
+      "prompt": "Set up git and GitHub properly on this Mac: identity, SSH, the works.",
+      "expected_behavior": [
+        "sets user.name/user.email (asking for values, never inventing them) plus the sensible-defaults set (init.defaultBranch, fetch.prune, push.autoSetupRemote, rebase.autoStash...)",
+        "generates ed25519 with a passphrase, wires ~/.ssh/config with AddKeysToAgent/UseKeychain/IdentityFile and runs /usr/bin/ssh-add --apple-use-keychain",
+        "uploads the key via gh ssh-key add or pbcopy+web, then verifies with ssh -T git@github.com expecting the Hi <user> message",
+        "checks for an existing key first and never overwrites ~/.ssh/id_ed25519 without explicit consent",
+        "creates a global gitignore with .DS_Store etc. and wires core.excludesfile"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "make github show my commits as Verified",
+      "expected_behavior": [
+        "configures SSH signing (gpg.format ssh, user.signingkey pointing at the .pub, commit.gpgsign, tag.gpgsign) rather than defaulting to GPG",
+        "tells the user to add the key to GitHub as a SIGNING key - a second upload, separate from the authentication key entry",
+        "sets up gpg.ssh.allowedSignersFile so git log --show-signature verifies locally",
+        "verifies with a signed test commit and git verify-commit or by checking github after push"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "i keep committing with my personal email at work, fix it for good",
+      "expected_behavior": [
+        "uses includeIf gitdir: with per-directory config files instead of manual switching, explaining the trailing-slash recursive matching",
+        "optionally shows the hasconfig:remote.*.url variant for remote-based routing",
+        "removes the global user.email or sets it deliberately so the wrong identity cannot leak, and verifies with git config in both directory trees"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "ssh asks for my key passphrase on every git pull",
+      "expected_behavior": [
+        "adds the Keychain config block (AddKeysToAgent yes, UseKeychain yes, IdentityFile) to ~/.ssh/config",
+        "runs Apple's /usr/bin/ssh-add --apple-use-keychain (noting third-party OpenSSH lacks the flag)",
+        "verifies persistence with a fresh shell and explains keys reload automatically via the config after reboot"
+      ]
+    }
+  ]
+}

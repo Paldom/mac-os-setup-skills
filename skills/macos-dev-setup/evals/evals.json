@@ -1,0 +1,99 @@
+{
+  "skill": "macos-dev-setup",
+  "cases": [
+    {
+      "type": "should_trigger",
+      "prompt": "set up my new mac for development"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "i just unboxed a macbook pro - take it from zero to ready to code"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "fresh macos install, make me a full dev environment"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "walk me through a complete developer setup on this mac"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "new work laptop, need everything: shell, git, runtimes, docker, the works"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "make this mac dev-ready end to end"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "wiped my mac, restore a full development environment from scratch"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "set up this machine for mobile web and ai development, all of it"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install homebrew"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "set up zsh with a nice prompt"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "generate an ssh key for github"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install docker on my mac"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "update everything on my mac"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install xcode command line tools"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "set up my mac for ios development"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "show hidden files and speed up key repeat"
+    },
+    {
+      "type": "quality",
+      "prompt": "Brand new MacBook - set it up for development. I do web and a bit of cloud work.",
+      "expected_behavior": [
+        "inventories existing state first (brew? git? xcode-select? existing shell config?) instead of assuming factory-fresh",
+        "proposes a plan: core sequence (system-prep, security, homebrew, zsh, cli-tools, git identity, runtimes, defaults, editor, dotfiles) plus the web and cloud optional tracks - and asks the user to confirm/trim BEFORE installing anything",
+        "applies the modern default stack (Starship, mise+uv, VS Code+Cursor) while preserving any existing shell/runtime setup it detects",
+        "executes each area via its focused skill's workflow in dependency order, verifying after each step and stopping on failures rather than plowing on",
+        "does not install unrequested optional tracks (mobile, ai) and ends with a whole-machine verification summary listing manual steps left (App Store sign-in, FileVault, license keys)"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "take this mac from zero to fully ready, i want everything including mobile and the ai clis",
+      "expected_behavior": [
+        "still plans first: shows the full track list with rough disk/time costs (Xcode ~40-50GB) and confirms",
+        "sequences correctly: system prep before homebrew, homebrew before everything brew-based, runtimes before mobile extras, defaults/dotfiles at the end",
+        "asks the subtrack questions (iOS/Android/both, which cloud providers, which AI CLIs) rather than installing all",
+        "runs verification at the end and reports every manual step remaining"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "my mac is half set up already - brew exists, git works. finish the job to a complete dev environment",
+      "expected_behavior": [
+        "detects and preserves the existing setup (does not reinstall brew or regenerate ssh keys), diffing plan vs reality",
+        "proposes only the missing areas and confirms",
+        "verification covers pre-existing pieces too (brew doctor, ssh -T) to catch latent breakage"
+      ]
+    }
+  ]
+}

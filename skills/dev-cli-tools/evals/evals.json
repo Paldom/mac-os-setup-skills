@@ -1,0 +1,51 @@
+{
+  "skill": "dev-cli-tools",
+  "cases": [
+    { "type": "should_trigger", "prompt": "install the modern CLI tools on my mac - ripgrep, fzf, that family" },
+    { "type": "should_trigger", "prompt": "what terminal tools should every developer have installed?" },
+    { "type": "should_trigger", "prompt": "set up fzf with ctrl-r history search" },
+    { "type": "should_trigger", "prompt": "give me better ls, cat and grep replacements" },
+    { "type": "should_trigger", "prompt": "install jq, bat, eza and friends" },
+    { "type": "should_trigger", "prompt": "z jump around directories - install zoxide" },
+    { "type": "should_trigger", "prompt": "i want a nice git diff pager and a git tui" },
+    { "type": "should_trigger", "prompt": "install gh the github cli" },
+    { "type": "should_trigger", "prompt": "kit me out with a good cli toolbelt on this new macbook" },
+    { "type": "should_not_trigger", "prompt": "install homebrew itself" },
+    { "type": "should_not_trigger", "prompt": "set up oh my zsh and a prompt theme" },
+    { "type": "should_not_trigger", "prompt": "install chrome, slack and other mac apps" },
+    { "type": "should_not_trigger", "prompt": "install the aws and gcloud CLIs" },
+    { "type": "should_not_trigger", "prompt": "install claude code and codex cli" },
+    { "type": "should_not_trigger", "prompt": "upgrade all my brew packages" },
+    { "type": "should_not_trigger", "prompt": "write a jq query to extract this field" },
+    { "type": "should_not_trigger", "prompt": "set up node and python version managers" },
+    {
+      "type": "quality",
+      "prompt": "Install a solid modern CLI toolbelt on my Mac.",
+      "expected_behavior": [
+        "checks brew exists first (points to homebrew-setup if missing) and installs the curated set in one brew install command",
+        "adds required init lines idempotently to ~/.zshrc: fzf via source <(fzf --zsh), zoxide after compinit; offers aliases (ls->eza, cat->bat) as opt-in rather than forcing them",
+        "installs eza not the dead exa, and explains one or two non-obvious picks briefly",
+        "verifies a few tools run (rg --version, fzf --version) and that ctrl-r works in a fresh shell",
+        "does not install GUI apps, cloud CLIs, or language runtimes"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "fzf is installed but ctrl-r doesn't do anything",
+      "expected_behavior": [
+        "diagnoses missing shell integration rather than reinstalling fzf",
+        "adds source <(fzf --zsh) to .zshrc exactly once and verifies in a new shell",
+        "mentions the legacy install-script route only as background"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "make git diffs pretty in the terminal",
+      "expected_behavior": [
+        "installs git-delta and configures core.pager, interactive.diffFilter and delta options via git config",
+        "keeps the change minimal and shows how to revert",
+        "optionally suggests lazygit as a companion, not a requirement"
+      ]
+    }
+  ]
+}
