@@ -23,8 +23,10 @@ domain, dead key, missing apply step).
 
 - Show the user the grouped command list and confirm before applying —
   several tweaks change visible state (Dock contents, Finder views).
-- Clearing Dock icons (`persistent-apps -array`) removes all pins. It
-  deletes no apps and is reversible by re-pinning, but always ask first.
+- Dock decluttering keeps a keep-list (Apps launcher, Notes, the user's
+  daily apps) — never strip the Dock bare unasked. The full reset
+  (`persistent-apps -array`) removes all pins; it deletes no apps and is
+  reversible by re-pinning, but it's an explicit request, not a default.
 - Only QoL preferences here — never write security-, update-, or
   Gatekeeper-related domains.
 - After a macOS major upgrade, re-verify with `defaults read` before
@@ -69,7 +71,11 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock mru-spaces -bool false                # stop reordering Spaces
-# Optional, ASK FIRST - clears every pinned icon (fresh-Mac decluttering):
+# Optional decluttering, ASK FIRST - don't strip the Dock bare: keep the
+# productivity staples (the Apps/Launchpad launcher, Notes, the user's
+# daily apps). Ask for the keep-list; removing individual icons is drag-off
+# or right-click -> Options -> Remove from Dock. Full reset only on request
+# (clears EVERY pin - the user re-pins the keepers afterwards):
 # defaults write com.apple.dock persistent-apps -array
 killall Dock
 

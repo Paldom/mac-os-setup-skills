@@ -36,7 +36,7 @@ upgrade, spot-check with `defaults read` before re-applying.
 | `com.apple.dock minimize-to-application` | `-bool true` | Desktop & Dock |
 | `com.apple.dock show-recents` | `-bool false` | Desktop & Dock (present on Tahoe) |
 | `com.apple.dock static-only` | `-bool true` | show only running apps; hides pins while set |
-| `com.apple.dock persistent-apps` | `-array` (empty) | clears ALL pinned apps; reversible by re-pinning; also `persistent-others` for right side; may need a second `killall Dock` |
+| `com.apple.dock persistent-apps` | `-array` (empty) | full reset: clears ALL pins — only on explicit request; prefer a keep-list (Apps launcher, Notes, daily apps) with per-icon removal (drag off / right-click → Remove from Dock); reversible by re-pinning; also `persistent-others` for right side; may need a second `killall Dock` |
 | `com.apple.dock mru-spaces` | `-bool false` | Desktop & Dock → Mission Control |
 
 ## Keyboard

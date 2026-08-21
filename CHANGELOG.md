@@ -78,5 +78,9 @@ versioning: [SemVer](https://semver.org) on the plugin manifest
   (inventory → profile → costed editable manifest → gated execution with
   a resumable state file), linked from the README.
 
+- `macos-defaults`: Dock decluttering now works from a keep-list
+  (Apps/Launchpad launcher, Notes, daily apps) with per-icon removal; the
+  full `persistent-apps -array` reset is explicit-request-only.
+
 ### Notes
 - Repository scaffolded from the skills template.

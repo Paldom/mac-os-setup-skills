@@ -1,23 +1,74 @@
 {
   "skill": "macos-defaults",
   "cases": [
-    { "type": "should_trigger", "prompt": "show hidden files in Finder" },
-    { "type": "should_trigger", "prompt": "make my key repeat faster on macos" },
-    { "type": "should_trigger", "prompt": "change where screenshots are saved" },
-    { "type": "should_trigger", "prompt": "clean up the dock and make it autohide" },
-    { "type": "should_trigger", "prompt": "apply sensible macos defaults for a developer" },
-    { "type": "should_trigger", "prompt": "turn off autocorrect and smart quotes, they break my code snippets" },
-    { "type": "should_trigger", "prompt": "finder should show the path bar and file extensions" },
-    { "type": "should_trigger", "prompt": "defaults write tweaks for a new mac pls" },
-    { "type": "should_trigger", "prompt": "stop macos from creating .DS_Store files on network drives" },
-    { "type": "should_not_trigger", "prompt": "enable filevault and the firewall" },
-    { "type": "should_not_trigger", "prompt": "install homebrew" },
-    { "type": "should_not_trigger", "prompt": "set up my terminal prompt and zsh plugins" },
-    { "type": "should_not_trigger", "prompt": "set up my entire new mac for development" },
-    { "type": "should_not_trigger", "prompt": "install raycast and rectangle" },
-    { "type": "should_not_trigger", "prompt": "write a defaults section for my linux dotfiles" },
-    { "type": "should_not_trigger", "prompt": "change my VS Code settings.json defaults" },
-    { "type": "should_not_trigger", "prompt": "why is my mac slow, check activity monitor" },
+    {
+      "type": "should_trigger",
+      "prompt": "show hidden files in Finder"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "make my key repeat faster on macos"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "change where screenshots are saved"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "clean up the dock and make it autohide"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "apply sensible macos defaults for a developer"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "turn off autocorrect and smart quotes, they break my code snippets"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "finder should show the path bar and file extensions"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "defaults write tweaks for a new mac pls"
+    },
+    {
+      "type": "should_trigger",
+      "prompt": "stop macos from creating .DS_Store files on network drives"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "enable filevault and the firewall"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install homebrew"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "set up my terminal prompt and zsh plugins"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "set up my entire new mac for development"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "install raycast and rectangle"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "write a defaults section for my linux dotfiles"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "change my VS Code settings.json defaults"
+    },
+    {
+      "type": "should_not_trigger",
+      "prompt": "why is my mac slow, check activity monitor"
+    },
     {
       "type": "quality",
       "prompt": "Apply good developer defaults to this Mac: Finder, Dock, keyboard, screenshots.",
@@ -41,8 +92,8 @@
       "type": "quality",
       "prompt": "remove all the junk icons from my dock like a fresh minimal setup",
       "expected_behavior": [
-        "warns this clears all pinned Dock apps (reversible by re-pinning) and asks before running",
-        "uses defaults write com.apple.dock persistent-apps -array (and optionally persistent-others) followed by killall Dock",
+        "asks for a keep-list first, suggesting productivity staples stay pinned (the Apps/Launchpad launcher, Notes, daily apps) rather than stripping the Dock bare",
+        "removes unwanted icons individually (drag off / right-click Remove from Dock); uses the full persistent-apps -array reset only if the user explicitly wants everything cleared, backing up the Dock plist first and noting keepers get re-pinned",
         "suggests companion Dock settings (autohide, show-recents false) as options"
       ]
     },
