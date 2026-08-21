@@ -1,6 +1,7 @@
 ---
 name: zsh-setup
 description: Sets up a modern zsh shell on macOS - autosuggestions and syntax highlighting via Homebrew, the Starship prompt (maintained replacement for Powerlevel10k), a Nerd Font, and a clean .zshrc structure. Use for "set up zsh", "terminal prompt", "install starship", "zsh plugins", "slow shell startup", "powerlevel10k". Not for terminal apps, CLI tool picks, dotfiles repos, or scripting.
+license: MIT
 ---
 
 # zsh Setup

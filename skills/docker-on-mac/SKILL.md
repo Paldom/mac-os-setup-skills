@@ -1,6 +1,7 @@
 ---
 name: docker-on-mac
 description: Sets up a container runtime on macOS - Docker Desktop (paid over 250 staff/$10M), OrbStack (paid commercial use), or Colima (free CLI) - install, hello-world verify, contexts, amd64 on Apple Silicon. Use for "install docker on my Mac", "docker desktop vs orbstack vs colima", "docker command not found", "exec format error". Not for Dockerfiles, compose debugging, Kubernetes, or databases.
+license: MIT
 ---
 
 # Docker on Mac

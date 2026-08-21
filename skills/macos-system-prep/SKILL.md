@@ -1,6 +1,7 @@
 ---
 name: macos-system-prep
 description: Prepares a fresh Mac's OS baseline for development - macOS software updates, Xcode Command Line Tools, optional Rosetta 2, and a source directory. Use for "new Mac before Homebrew", "install Command Line Tools", "xcode-select", "invalid active developer path", "clang not found", "install Rosetta". Not for security hardening, GUI tweaks, full Xcode, installing packages, or routine update runs.
+license: MIT
 ---
 
 # macOS System Prep

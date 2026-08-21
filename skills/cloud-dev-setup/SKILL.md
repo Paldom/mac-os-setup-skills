@@ -1,6 +1,7 @@
 ---
 name: cloud-dev-setup
 description: Installs cloud CLIs on macOS - asks which of AWS, Azure, Google Cloud, Databricks, kubectl, Terraform/OpenTofu, then installs and authenticates via SSO/browser flows with named profiles, never static keys. Use for "install aws/az/gcloud/databricks CLI", "aws sso setup", "kubectl on Mac", "terraform or opentofu". Not for writing infrastructure code, deploying, Docker, or the GitHub CLI.
+license: MIT
 ---
 
 # Cloud Dev Setup

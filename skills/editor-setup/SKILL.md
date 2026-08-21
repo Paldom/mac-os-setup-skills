@@ -1,6 +1,7 @@
 ---
 name: editor-setup
 description: Installs and configures code editors on macOS - VS Code plus Cursor by default (Zed alternative), the code/cursor shell commands, a merged settings.json baseline, extensions, Settings Sync. Use for "install VS Code/Cursor/Zed", "code command not found", "editor settings baseline", "which extensions". Not for terminal emulators, JetBrains/Neovim config, or linter and LSP debugging.
+license: MIT
 ---
 
 # Editor Setup

@@ -1,6 +1,7 @@
 ---
 name: mac-dev-apps
 description: Installs the GUI app baseline for a developer Mac via casks and mas - browsers, Slack/Zoom, terminals (Ghostty/Warp/iTerm2), Raycast/Rectangle, DB clients, Amphetamine, VPNs - flagging sign-ins and licenses. Use for "install my Mac apps", "apps for a new Mac", "install chrome/slack/raycast", "terminal app recommendation". Not for CLI tools, editors, Docker, or cloud/AI CLIs.
+license: MIT
 ---
 
 # Mac Dev Apps

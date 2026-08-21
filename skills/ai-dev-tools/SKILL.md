@@ -1,6 +1,7 @@
 ---
 name: ai-dev-tools
 description: Installs AI coding agent CLIs on macOS - asks which of Claude Code, Codex, Gemini, Copilot, Grok Build, Kimi Code, then uses official installers, subscription sign-ins, and permission guardrails. Use for "install claude code", "set up codex/gemini/copilot/pi CLI", "AI coding agents on my Mac". Not for using the agents, prompt authoring, MCP servers, API integration, or local LLMs.
+license: MIT
 ---
 
 # AI Dev Tools

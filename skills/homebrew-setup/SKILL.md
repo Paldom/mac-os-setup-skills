@@ -1,6 +1,7 @@
 ---
 name: homebrew-setup
 description: Installs and configures Homebrew on macOS - official installer, shellenv line in ~/.zprofile, brew doctor, and the Brewfile/brew bundle workflow with mas. Use for "install homebrew", "brew command not found", "brew doctor problems", "set up a Brewfile", "brew bundle dump/restore". Not for choosing which tools or apps to install, upgrade runs, or Xcode Command Line Tools.
+license: MIT
 ---
 
 # Homebrew Setup

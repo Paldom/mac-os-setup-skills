@@ -1,6 +1,7 @@
 ---
 name: mobile-dev-setup
 description: Sets up mobile development on macOS - asks iOS, Android, or both; full Xcode with xcode-select, license and simulators; Android Studio with SDK, ANDROID_HOME and licenses; React Native/Flutter prerequisites. Use for "set up iOS/Android development", "install Xcode/Android Studio", "react native environment", "ANDROID_HOME not set". Not for Command Line Tools alone, app debugging, or publishing.
+license: MIT
 ---
 
 # Mobile Dev Setup

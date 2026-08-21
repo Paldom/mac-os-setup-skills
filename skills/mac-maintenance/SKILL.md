@@ -1,6 +1,7 @@
 ---
 name: mac-maintenance
 description: Runs recurring update maintenance on a developer Mac - brew update/upgrade with cask auto_updates semantics, cleanup, Brewfile re-capture, mas and macOS updates, Oh My Zsh and runtime managers, safe disk reclaim. Use for "update everything", "upgrade brew packages", "run maintenance", "why didn't brew update chrome". Not for first-time installs, broken Homebrew, or project dependency bumps.
+license: MIT
 ---
 
 # Mac Maintenance

@@ -1,6 +1,7 @@
 ---
 name: git-ssh-identity
 description: Configures developer identity for git and GitHub on macOS - git config defaults, ed25519 SSH key in Apple Keychain, gh auth, SSH commit signing, includeIf work/personal identities, global gitignore. Use for "set up git", "SSH key for GitHub", "sign commits", "passphrase asked every time", "separate work and personal git email". Not for installing git/gh, branching workflows, or repo settings.
+license: MIT
 ---
 
 # Git & SSH Identity

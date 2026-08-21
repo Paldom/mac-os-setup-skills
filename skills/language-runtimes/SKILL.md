@@ -1,6 +1,7 @@
 ---
 name: language-runtimes
 description: Sets up language runtimes on macOS the modern way - mise for Node LTS, Java Temurin LTS, Go and Ruby, uv for Python, rustup for Rust; one manager per runtime, preserving existing nvm/pyenv/jenv first. Use for "install node/python/java versions", "set up mise/uv", "runtime version managers", "manager conflicts". Not for project dependencies, pnpm/databases, Android JDK wiring, or OS packages.
+license: MIT
 ---
 
 # Language Runtimes

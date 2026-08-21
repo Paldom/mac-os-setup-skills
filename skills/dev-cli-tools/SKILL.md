@@ -1,6 +1,7 @@
 ---
 name: dev-cli-tools
 description: Installs a curated modern CLI toolbelt on macOS - ripgrep, fd, fzf, bat, eza, zoxide, jq, git-delta, lazygit, gh - plus the shell integration lines each needs. Use for "install CLI tools", "better ls/cat/grep replacements", "set up fzf/zoxide", "terminal toolbelt". Not for installing Homebrew itself, GUI apps, cloud CLIs, language runtimes, or prompt themes.
+license: MIT
 ---
 
 # Dev CLI Tools

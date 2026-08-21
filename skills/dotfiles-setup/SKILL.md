@@ -1,6 +1,7 @@
 ---
 name: dotfiles-setup
 description: Creates or restores a dotfiles repository on macOS - chezmoi by default (Stow or bare-git alternatives), adopting existing config without overwriting, secrets hygiene, Brewfile tracking. Use for "set up dotfiles", "version control my zshrc/gitconfig", "sync config between Macs", "restore dotfiles on a new machine". Not for shell config content, Brewfile generation, git identity, or backups.
+license: MIT
 ---
 
 # Dotfiles Setup

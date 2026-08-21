@@ -1,6 +1,7 @@
 ---
 name: web-dev-setup
 description: Adds full-stack web extras to a Mac dev environment - pnpm (corepack gone from Node 25+), pinned PostgreSQL and Redis via brew services with keg-only PATH fixes, and an API client. Use for "set up my Mac for web development", "install postgres/redis locally", "brew services database", "install pnpm", "psql not found". Not for Node version managers, Docker databases, deploys, or SQL debugging.
+license: MIT
 ---
 
 # Web Dev Setup

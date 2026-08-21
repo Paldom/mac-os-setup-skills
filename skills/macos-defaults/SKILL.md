@@ -1,6 +1,7 @@
 ---
 name: macos-defaults
 description: Applies developer-friendly macOS preferences via defaults write - Finder path bar and hidden files, Dock autohide and cleanup, fast key repeat, autocorrect off, screenshot location - with correct apply steps and verification. Use for "show hidden files", "faster key repeat", "screenshot folder", "clean up the Dock", "macOS defaults". Not for security settings, app installs, or shell config.
+license: MIT
 ---
 
 # macOS Defaults
