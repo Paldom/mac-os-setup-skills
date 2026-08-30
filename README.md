@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon.svg" alt="mac-os-setup-skills icon" width="128"/>
+</p>
+
 # Mac Os Setup Skills
 
 [![CI](https://github.com/Paldom/mac-os-setup-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/Paldom/mac-os-setup-skills/actions/workflows/ci.yml)
