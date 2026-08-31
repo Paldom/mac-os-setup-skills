@@ -1,7 +1,7 @@
 {
   "name": "mac-os-setup-skills",
   "description": "Agent Skills for setting up a Mac for software development: shell and package manager, language runtimes, developer tooling, dotfiles and system preferences, automated where safe and with verified manual steps where not.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": {
     "name": "Paldom",
     "url": "https://github.com/Paldom"

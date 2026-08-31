@@ -1,6 +1,6 @@
 ---
 name: macos-security-baseline
-description: Hardens a developer Mac's security basics - FileVault disk encryption, the application firewall, and Touch ID for sudo via /etc/pam.d/sudo_local. Use for "enable Touch ID for sudo", "turn on FileVault", "secure/harden my Mac", "firewall setup", "sudo with fingerprint". Not for OS updates or Command Line Tools, SSH keys and commit signing, or bypassing Gatekeeper for blocked apps.
+description: Hardens a developer Mac's security basics - FileVault disk encryption, the application firewall, and Touch ID for sudo via /etc/pam.d/sudo_local. Use for "enable Touch ID for sudo", "is my Mac encrypted", "turn on FileVault", "secure/harden my Mac for work", "firewall setup". Not for OS updates or Command Line Tools, SSH keys and commit signing, or bypassing Gatekeeper for blocked apps.
 license: MIT
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: macos-dev-setup
-description: Orchestrates a complete fresh-Mac developer setup - inventories the machine, plans core steps (system prep, security, Homebrew, shell, git, runtimes, editor, dotfiles), asks which optional tracks to add, then runs each area skill in order with verification. Use for "set up my new Mac", "fresh macOS to dev environment", "make this Mac dev-ready". Not for a single area - use the focused skill.
+description: Orchestrates a complete fresh-Mac developer setup - inventories the machine, plans core steps (system prep, security, Homebrew, shell, git, runtimes, editor, dotfiles), asks which optional tracks to add, then runs each area skill in order with verification. Use for "set up my new Mac", "wiped my Mac, restore everything from scratch", "set up this machine for all of it", "make this Mac dev-ready". Not for a single area - use the focused skill.
 license: MIT
 ---
 

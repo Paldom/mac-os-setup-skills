@@ -40,12 +40,16 @@ that channel, not add a second). npm routes need Node ≥ 22
 and fallbacks: [references/ai-cli-matrix.md](references/ai-cli-matrix.md)):
 
 ```sh
-# Claude Code (Anthropic) - native installer is primary; brew cask/npm secondary
-curl -fsSL https://claude.ai/install.sh | bash
+# Claude Code (Anthropic) - native installer is primary; brew cask/npm secondary.
+# Fetch first and let the user see it: never pipe a remote script straight into a
+# shell on someone's machine, even from a vendor you trust.
+curl -fsSL https://claude.ai/install.sh -o /tmp/claude-install.sh
+less /tmp/claude-install.sh && sh /tmp/claude-install.sh
 claude --version && claude doctor        # then `claude` -> browser login (Pro/Max/Team or Console)
 
-# Codex CLI (OpenAI)
-curl -fsSL https://chatgpt.com/codex/install.sh | sh   # or: npm i -g @openai/codex / brew install --cask codex
+# Codex CLI (OpenAI) - same two-step; or npm i -g @openai/codex / brew install --cask codex
+curl -fsSL https://chatgpt.com/codex/install.sh -o /tmp/codex-install.sh
+less /tmp/codex-install.sh && sh /tmp/codex-install.sh
 codex --version                          # first run -> "Sign in with ChatGPT" (Plus/Pro/Business)
 
 # Gemini CLI (Google)
@@ -57,25 +61,30 @@ npm install -g @github/copilot           # or: brew install --cask copilot-cli
 copilot                                  # /login with the Copilot-subscribed account
 
 # Grok Build (xAI) - official since 2026-05
-curl -fsSL https://x.ai/cli/install.sh | bash          # SuperGrok / X Premium+ sign-in
+curl -fsSL https://x.ai/cli/install.sh -o /tmp/grok-install.sh   # SuperGrok / X Premium+
+less /tmp/grok-install.sh && sh /tmp/grok-install.sh
 
 # Kimi Code (Moonshot) - successor of kimi-cli (auto-migrates config)
-curl -fsSL https://code.kimi.com/kimi-code/install.sh | bash
+curl -fsSL https://code.kimi.com/kimi-code/install.sh -o /tmp/kimi-install.sh
+less /tmp/kimi-install.sh && sh /tmp/kimi-install.sh
 kimi                                     # /login: subscription OAuth (preferred; a pay-as-you-go
                                          # API-key mode exists - enter it inside the tool's own
                                          # login flow only, never via chat or shell args)
 
 # pi (Earendil / Mario Zechner) - minimal open-source agent, multi-provider
-npm install -g --ignore-scripts @earendil-works/pi-coding-agent   # or: curl -fsSL https://pi.dev/install.sh | sh
+npm install -g --ignore-scripts @earendil-works/pi-coding-agent   # preferred; the vendor
+                                         # also ships an install.sh at https://pi.dev/install.sh
 pi                                       # /login: ChatGPT, Claude, Copilot, xAI, OpenRouter
                                          # subscription OAuth, or provider API keys via env
 ```
 
 Install-channel policy: prefer brew/npm where a real package exists
 (Gemini, Copilot, Codex, Claude Code casks) — reviewable and
-update-managed. The `curl | bash` lines are the vendors' documented
-installers (verified against vendor docs; sources in the reference) and
-the only channel for some tools; a cautious user can download to a file,
+update-managed. Where only a shell installer exists, fetch it to a file,
+read it, then run it — the two-step above. These are the vendors' documented
+installers (verified against vendor docs; sources in the reference), but an
+agent piping any remote script straight into a shell is the exact pattern
+registry scanners flag, so this skill never does it. A cautious user can,
 read it, then run it — offer that.
 
 ### Guardrails (after install)
